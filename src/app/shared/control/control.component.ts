@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, Host, HostBinding, HostListener, inject, input, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ElementRef, Host, HostBinding, HostListener, inject, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -12,7 +12,7 @@ import { Component, ContentChild, ElementRef, Host, HostBinding, HostListener, i
     '(click)': 'onClick()'
   }
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit{
   //@HostBinding('class') className = 'control';
   // @HostListener('click') onClick(){
   //   console.log('Clicked!')
@@ -21,8 +21,10 @@ export class ControlComponent {
   private el = inject(ElementRef)
   @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLAreaElement>;
 
+  ngAfterContentInit() {
+    console.log(this.control);
+  }
 
-  
   onClick(){
     console.log('Clicked!');
     console.log(this.el);
